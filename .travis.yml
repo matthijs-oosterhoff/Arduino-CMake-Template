@@ -2,19 +2,25 @@ language: cpp
 sudo: false
 dist: trusty
 os:
-  - linux
-
+- linux
 addons:
   apt:
     packages:
-      - cmake
-
+    - cmake
 before_install:
-  - "[ -e ./arduino-1.8.3/arduino ] || $(wget http://downloads.arduino.cc/arduino-1.8.3-linux64.tar.xz && tar xf arduino-1.8.3-linux64.tar.xz)"
-  - "cp env.travis.cmake env.cmake"
-
+- "[ -e ./arduino-1.8.3/arduino ] || $(wget http://downloads.arduino.cc/arduino-1.8.3-linux64.tar.xz
+  && tar xf arduino-1.8.3-linux64.tar.xz)"
+- cp env.travis.cmake env.cmake
 cache:
   directories:
-    - ./arduino-1.8.3
+  - "./arduino-1.8.3"
+script: cmake . && make arduino-cmake-template.hex
 
-script:  cmake . && make arduino-cmake-template.hex
+deploy:
+  provider: releases
+  api_key:
+    secure: SqdLdQ2Z9XAAYEOoSe4l8ywDH2NTvx+rtbgDSsdhGNWOWihTNry0nXeNpbS5AOxTX34qvXCwFQfY9GDMl3oK6LMO2KG2tKepXXcUdfq91yUmbKOjG7ff4uVUpFxplD9YoV4zDhIU8f5RybKINeDOqjiQQqnmBlDkbi7e4CYTRPVeLI2ZzEjZ7n3q2fK/P/mzoUCYKWOm8I/wNaS2WK4kAjCfPCuQk2Lf505YRsjKoA9YfLpF2BZffR05A73zwDD5w7xwG1ZQA0h0D53b8wltGWdjq3GL2F0jZPdKKWVqM9gZhocFba1jxhmrUo7at4jHl26sbtuv2CAIsOCxY0V1I3SPAtmMNF1B26g6DlbXNt3ecS3LV4h5XnI2oCdjZ/KUSSqsesd4PSEvk/dupgr9DWxvwi/1rhTXzCbF1nF3iMLfwg2EG4acX4KyaGttmPvBBKeg9yBhZOx1fhVsYyhKosVL77Gt2InSmIKe1lqvx5sYaSzbxPFe0+NoBRqt85erAwNwFfx3PBHA551QnImWhPOiHwg2Vn1Z07yfKdgKS/02KP0dAT4cX5WbRATW7vHMFDr7aIUMOnZaV0w5if6Gp/xBrR28Hr4NSFEQeMzWFFwRunx82P+iy0eMQK9dnutxqu6m3u+V2imi/PSBueqhkjv1mzTuWXOv47uT/V3rTnw=
+  file: arduino-cmake-template.hex
+  skip_cleanup: true
+    on:
+      tags: true
