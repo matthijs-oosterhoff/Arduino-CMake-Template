@@ -12,7 +12,6 @@ addons:
 before_install:
   - wget http://downloads.arduino.cc/arduino-1.8.3-linux64.tar.xz
   - tar xf arduino-1.8.3-linux64.tar.xz
-  - sudo mv arduino-1.8.3 ~/arduino-1.8.3
 
 env:
   global:
