@@ -14,4 +14,7 @@ before_install:
   - tar xf arduino-1.8.3-linux64.tar.xz
   - cp env.travis.cmake env.cmake
 
+env:
+  - ARDUINO_PATH=${TRAVIS_BUILD_DIR}/arduino-1.8.3
+
 script: mkdir -p build && cd build && cmake .. && make arduino-cmake-template.hex
