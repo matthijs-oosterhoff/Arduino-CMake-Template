@@ -5,10 +5,7 @@ set(CMAKE_SYSTEM_NAME Generic)
 
 project(arduino-cmake-template)
 
-if (NOT ARDUINO_PATH)
-    include(env.cmake)
-endif ()
-
+include(env.cmake)
 
 set(AVR_MCU "atmega328p")
 set(AVR_FCPU "16000000")
