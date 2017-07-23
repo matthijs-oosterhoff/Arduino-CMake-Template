@@ -12,9 +12,6 @@ addons:
 before_install:
   - wget http://downloads.arduino.cc/arduino-1.8.3-linux64.tar.xz
   - tar xf arduino-1.8.3-linux64.tar.xz
-
-env:
-  global:
-  - ARDUINO_PATH="~/arduino-1.8.3"
+  - cp env.travis.cmake env.cmake
 
 script: mkdir -p build && cd build && cmake .. && make arduino-cmake-template.hex
