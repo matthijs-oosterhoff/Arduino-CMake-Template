@@ -7,9 +7,6 @@ os:
 addons:
   apt:
     packages:
-      - gcc-vr
-      - binutils-avr
-      - avr-libc
       - cmake
 
 before_install:
