@@ -6,7 +6,10 @@ endif ()
 enable_language(ASM)
 
 set(ARDUINO_CORE_DIR "${ARDUINO_PATH}/hardware/arduino/avr/cores/arduino/")
-set(ARDUINO_PINS_DIR "${ARDUINO_PATH}/hardware/arduino/avr/variants/${ARDUINO_VARIANT}")
+
+if (ARDUINO_VARIANT)
+    set(ARDUINO_PINS_DIR "${ARDUINO_PATH}/hardware/arduino/avr/variants/${ARDUINO_VARIANT}")
+endif ()
 
 if (NOT AVRDUDE_OPTIONS)
     set(AVRDUDE_OPTIONS -C${ARDUINO_PATH}/hardware/tools/avr/etc/avrdude.conf)
@@ -32,7 +35,9 @@ if (NOT AVRDUDE)
     set(AVRDUDE ${ARDUINO_PATH}/hardware/tools/avr/bin/avrdude)
 endif ()
 
-include_directories(${ARDUINO_PINS_DIR})
+if (ARDUINO_PINS_DIR)
+    include_directories(${ARDUINO_PINS_DIR})
+endif ()
 include_directories(${ARDUINO_CORE_DIR})
 
 set(ARDUINO_SOURCE_FILES
@@ -55,8 +60,8 @@ set(ARDUINO_SOURCE_FILES
         ${ARDUINO_CORE_DIR}/wiring.c
         ${ARDUINO_CORE_DIR}/wiring_analog.c
         ${ARDUINO_CORE_DIR}/wiring_digital.c
-#        ${ARDUINO_CORE_DIR}/wiring_pulse.c
-#        ${ARDUINO_CORE_DIR}/wiring_pulse.S
+        #        ${ARDUINO_CORE_DIR}/wiring_pulse.c
+        #        ${ARDUINO_CORE_DIR}/wiring_pulse.S
         ${ARDUINO_CORE_DIR}/wiring_shift.c
         ${ARDUINO_CORE_DIR}/WMath.cpp
         ${ARDUINO_CORE_DIR}/WString.cpp
